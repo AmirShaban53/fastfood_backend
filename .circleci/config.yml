@@ -12,8 +12,6 @@ jobs:
 
     steps:
 
-      - run:
-
       - checkout
 
       - restore_cache:
