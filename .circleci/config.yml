@@ -41,7 +41,18 @@ jobs:
 
       - run:
           name: run unit tests
-          command: npm run ci:test
+          command: npm run coverage
+
+      - store_artifacts:
+          path: ./coverage/clover.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: ./coverage/clover.xml
+          
+      
 
 workflows:
   build_test:
