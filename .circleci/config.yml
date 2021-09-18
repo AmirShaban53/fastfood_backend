@@ -33,6 +33,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json"}}
 
       - run:
+          name: update apt
+          command: sudo apt update
+      - run:
+          name: install postgresql client
+          command: sudo apt install -y postgresql-client
+
+      - run:
           name: run unit tests
           command: npm run ci:test
 
