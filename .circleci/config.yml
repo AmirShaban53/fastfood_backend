@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: wait for postgres connection
-          command: dockereize -wait tcp://localhost:5432 -timeout 1m
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: run unit tests
