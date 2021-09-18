@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: install npm packages
-          command: npm install
+          command: npm ci
 
       - save_cache:
           paths:
