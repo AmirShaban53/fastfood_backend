@@ -21,6 +21,9 @@ const testConfig = {
     dialect: process.env.PG_DIALECT
 }
 
+// var sequelize = new Sequelize('mysql://user:pass@example.com:9821/dbname', {
+//     // Look to the next section for possible options
+//   })
 
     const sequelize = new Sequelize(process.env.NODE_ENV === 'test'? testConfig : devConfig);
     try {
