@@ -41,7 +41,7 @@ jobs:
 
       - run:
           name: run unit tests
-          command: npm run coverage
+          command: npm run ci:test
 
 workflows:
   build_test:
