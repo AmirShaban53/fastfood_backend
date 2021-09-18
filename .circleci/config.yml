@@ -38,6 +38,9 @@ jobs:
       - run:
           name: install postgresql client
           command: sudo apt install -y postgresql-client
+      - run:
+          name: create test database
+          command: createdb "ah_sequelize_test_1" --host localhost --user postgres
 
       - run:
           name: run unit tests
