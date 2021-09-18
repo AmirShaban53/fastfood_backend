@@ -3,7 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import cors from 'cors';
 
-import logger from './Middleware/Logger.js';
+import logger from './Middleware/logger.js';
 import sequelize from './models/db.js';
 
 

@@ -1,4 +1,4 @@
-import logger from "../Middleware/Logger.js";
+import logger from "../Middleware/logger.js";
 import User from "../models/user.js";
 import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';

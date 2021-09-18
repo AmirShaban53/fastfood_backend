@@ -1,4 +1,4 @@
-import logger from "../Middleware/Logger.js";
+import logger from "../Middleware/logger.js";
 import Food from '../models/food.js';
 
 
