@@ -4,12 +4,16 @@ jobs:
   test:
     docker:
       - image: circleci/node:14.15.1
+        environment:
+          NODE_ENV: test
+          dialect: postgres
       - image: circleci/postgres:11-alpine-ram
         environment:
           POSTGRES_USER:  postgres
           POSTGRES_PASSWORD: postgres  
           POSTGRES_DB: postgres
           POSTGRES_DIALECT: postgres
+          dialect: postgres
       - image: redis:latest
   
     working_directory: ~/repo
