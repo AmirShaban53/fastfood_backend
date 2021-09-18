@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "set NODE_ENV=test && mocha --timeout 10000",
-    "ci:test": "set NODE_ENV=test && mocha --timeout 10000 --ci --detectOpenHAndles --forceExit",
+    "test": "set NODE_ENV=test&& mocha --timeout 10000",
+    "ci:test": "set NODE_ENV=test&& mocha --timeout 10000 --ci --detectOpenHAndles --forceExit",
     "coverage": "nyc npm test",
     "just": "node ./just.js",
     "start": "nodemon -e yaml index.js"
