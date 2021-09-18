@@ -4,17 +4,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:14.15.1
-        environment:
-          NODE_ENV: test
-          dialect: postgres
-      - image: circleci/postgres:11-alpine-ram
-        environment:
-          POSTGRES_USER:  postgres
-          POSTGRES_PASSWORD: postgres  
-          POSTGRES_DB: postgres
-          POSTGRES_DIALECT: postgres
-          dialect: postgres
-      - image: redis:latest
+      
   
     working_directory: ~/repo
 
@@ -35,16 +25,6 @@ jobs:
           paths:
             - ./node_modules
           key: v1-dependencies-{{ checksum "package.json"}}
-
-      - run:
-          name: update apt
-          command: sudo apt update
-      - run:
-          name: install postgresql client
-          command: sudo apt install -y postgresql-client
-      - run:
-          name: create test database
-          command: createdb "ah_sequelize_test_1" --host localhost --user postgres
 
       - run:
           name: run unit tests
