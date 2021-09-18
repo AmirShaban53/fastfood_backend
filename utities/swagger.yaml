@@ -1,0 +1,313 @@
+openapi: 3.0.0
+info: 
+    title: fastfood backend
+    version: 1.0.0
+    description: this is the documentation for the fastfood backend!
+
+servers:
+    - url: http://localhost:8080
+
+components: 
+
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+
+      servers:
+        - url: http://localhost:8080
+
+    schemas:
+      food:
+        type: object
+        required:
+          - name
+          - price
+        properties:
+          food_id:
+            type: integer
+            description: this is the id for the food!
+          name:
+            type: string
+            description: this is the name of the food
+          price:
+            type: integer
+            description: this is the price of the food
+
+      order:
+        type: object
+        required:
+          - name
+          - price
+          - owner
+          - status
+        properties:
+          order_id:
+            type: integer
+            description: this is the id of the order
+          name:
+            type: string
+            description: this is the order of the order
+          unit-price:
+            type: integer
+            description: this is the unit price of the order
+          quantity:
+            type: integer
+            description: this is the quantity of the order
+          price:
+            type: integer
+            description: this is the total price
+          owner:
+            type: string
+            description: this is the owner of the order
+          status:
+            type: boolean
+            description: this is the status of the order
+
+      user:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          user_id:
+            type: integer
+            description: this is the id of the user
+          email:
+            type: string
+            description: this is the email of the user
+          password:
+            type: string
+            description: this is the password of the user
+          role:
+            type: string
+            description: this is the role of the user
+
+
+paths:
+
+  /auth/signup:
+    post:
+      summary: create a new user
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        201:
+          description: new user created!
+        409:
+          description: user already existes
+        500:
+          description: server error occurred
+  /auth/login:
+    post:
+      summary: login exsiting user
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        200:
+          description: user logged in!
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+
+
+
+  /menu:
+    get:
+      summary: view all food items
+      tags: [food]
+      responses:
+        200:
+          description: list of foods!
+          content:
+            application/json:
+              shema:
+                $ref: '#components/schemas/food'
+        500:
+          description: server error occurred
+    
+    post:
+      summary: add a food item
+      tags: [food]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/food'
+      responses:
+        201:
+          description: new food added!
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+  /menu/{id}:
+    patch:
+      summary: edit a food item's properties
+      tags: [food]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: food_id
+          required: true
+          schema:
+            type: integer
+          description: the food id
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/food'
+      responses:
+        200:
+          description: food updated!
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+    
+    delete:
+      summary: remove food item from database
+      tags: [food]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: food_id
+          required: true
+          schema:
+            type: integer
+          description: the food id
+      responses:
+        200:
+          description: food removed!
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+
+  /orders:
+    get:
+      summary: get a list of all user orders
+      tags: [orders]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: list of user orders
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/order'
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+  
+  /orders/{id}:
+    get:
+      summary: get an individual user order
+      tags: [orders]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: integer
+          description: the order id
+      responses:
+        200:
+          description: individual order!
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/order'
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+    
+    patch:
+      summary: edit an individual user order
+      tags: [orders]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: integer
+          description: the order id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+      responses:
+        200:
+          description: order updated!
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+
+  /users/orders:
+    get:
+      summary: view history of orders
+      tags: [user]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: history of orders!
+            content:
+              application/json:
+                schema:
+                  $ref: '#components/schemas/order'
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+    
+    post:
+      summary: create an order
+      tags: [user]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+      responses:
+        200:
+          description: order made!
+        401:
+          description: authenitcation failed
+        500:
+          description: server error occurred
+
+
