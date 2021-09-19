@@ -1,10 +1,10 @@
-import express from 'express';
 import swaggerUi from 'swagger-ui-express';
+//import sequelize from './models/db.js';
+import express from 'express';
 import YAML from 'yamljs';
 import cors from 'cors';
 
 import logger from './Middleware/logger.js';
-import sequelize from './models/db.js';
 
 
 import auth from './routes/auth.js';
@@ -15,7 +15,6 @@ import users from './routes/users.js';
 const PORT = process.env.PORT || 8080;
 
 const app = express();
-sequelize.sync();
 
 const swaggerDoc = YAML.load('./utities/swagger.yaml');
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));

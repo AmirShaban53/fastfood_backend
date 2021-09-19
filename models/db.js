@@ -31,17 +31,18 @@ const testConfig =  `postgres://${process.env.PG_USERNAME}:${process.env.PG_PASS
 //     // Look to the next section for possible options
 //   })
 
-    // const sequelize = new Sequelize(process.env.NODE_ENV === 'test'? testConfig : devConfig);
-    const sequelize = new Sequelize(testConfig);
-    try {
-        await sequelize.authenticate();
-        sequelize.sync();
-        logger.info("connection to database made!");
-    } catch (error) {
-        logger.error("connection to database failed!", error);
-        
-    }
-
+    const sequelize = new Sequelize(process.env.NODE_ENV === 'test'? testConfig : devConfig);
+    // const sequelize = new Sequelize(devConfig);
+    
+        try {
+            await sequelize.authenticate();
+            sequelize.sync();
+            logger.info("connection to database made!");
+        } catch (error) {
+            logger.error("connection to database failed!", error);
+            
+        }
+    
 export default sequelize;
 
 

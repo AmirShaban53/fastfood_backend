@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "set NODE_ENV=test &&  mocha --timeout 10000 ",
-    "ci:test": "set NODE_ENV=test && mocha --ci --detectOpenHandles --forceExit",
-    "coverage": "nyc report",
+    "test": "set NODE_ENV=test && mocha --timeout 10000 --exit",
+    "ci:test": "set NODE_ENV=test && mocha --ci --exit",
+    "coverage": "nyc npm test",
     "just": "node ./just.js",
     "start": "nodemon -e yaml index.js"
   },
@@ -15,7 +15,6 @@
     "all": "true",
     "include": ["routes/*.js"],
     "exclude": [],
-    "report": true,
     "reporter": ["text","html", "lcov"]
   },
   "author": "AMIR BUDDA SHABAN",
