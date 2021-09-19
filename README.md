@@ -1,14 +1,13 @@
-### This is a RESTFUL API for a food delivery app.
-
 ![CircleCI](https://img.shields.io/circleci/build/github/AmirShaban53/fastfood_backend/master)
 
-# Project Title
+# FAST FOOD API
 
-Simple overview of use/purpose.
+food delivery app.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+This is a restful API desgined to for a fast food resturant inodrer to be used in online
+orders and delivery.
 
 ## Getting Started
 
@@ -17,9 +16,12 @@ An in-depth paragraph about your project and overview of use.
 * Describe any prerequisites, libraries, OS version, etc., needed before installing program.
 * ex. Windows 10
 
-### Installing
+### get started
 
 * How/where to download your program
+```
+npm install
+```
 * Any modifications needed to be made to files/folders
 
 ### Executing program
@@ -37,9 +39,9 @@ Any advise for common problems or issues.
 command to run if program contains helper info
 ```
 
-## Authors
+## Author
 
-Contributors names and contact info
+AMIR BUDDA SHABAN
 
 ex. Dominique Pizzie  
 ex. [@DomPizzie](https://twitter.com/dompizzie)
