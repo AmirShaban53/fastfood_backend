@@ -21,17 +21,20 @@ npm install
 ```
    
 
-
 ### Usage
 
 * How to run the program
-* Step-by-step bullets
+
 ```
-code blocks for commands
+#to start development server
+npm start
+
+#to run unit tests and code coverage
+npm run test
 ```
 
 
-```
+
 
 ## Author
 
