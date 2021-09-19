@@ -31,7 +31,7 @@ npm install
 npm start
 
 #to run unit tests and code coverage
-npm run test
+npm run coverage
 ```
 
 
