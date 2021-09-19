@@ -19,7 +19,7 @@ orders and delivery.
 ### get started
 
 * How/where to download your program
-```
+```bash
 npm install
 ```
 * Any modifications needed to be made to files/folders
