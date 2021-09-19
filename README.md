@@ -1,4 +1,4 @@
-![CircleCI](https://img.shields.io/circleci/build/github/AmirShaban53/fastfood_backend/master)
+![CircleCI](https://img.shields.io/circleci/build/github/AmirShaban53/fastfood_backend?label=circleCi&logo=circleci)
 
 # FAST FOOD API
 
