@@ -11,15 +11,14 @@ orders and delivery.
 
 ## Getting Started
 
-### Dependencies
-
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
 
 ### installation and setup
 
 * download project from github.com/AmirShaban53/fastfood_backend/
-
+* run the following in the terminal
+```
+npm install
+```
    
 
 
