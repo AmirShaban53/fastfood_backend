@@ -16,7 +16,7 @@ orders and delivery.
 * Describe any prerequisites, libraries, OS version, etc., needed before installing program.
 * ex. Windows 10
 
-### get started
+### getting started
 
 * How/where to download your program
 ```bash
