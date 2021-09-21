@@ -8,7 +8,7 @@
     "test": "set NODE_ENV=test&&mocha --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --timeout 10000 --ci --exit",
     "start": "nodemon -e yaml index.js",
-    "test-with-coverage": "nyc npm run test "
+    "coverage": "nyc npm run test "
   },
   "nyc": {
     "useSpwanWrap": true,
