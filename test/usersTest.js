@@ -49,6 +49,32 @@ describe('user Routes', () => {
                 done();
                 })
         });
+        it('it should not make an order: no data entry', (done) => {
+            const foodName = {}
+            chai.request(server)
+                .post('/users/orders')
+                .send(foodName)
+                .set('authorization', `bearer ${token}`)
+                .end((err, res)=>{
+                    res.should.have.status(500);
+                    res.should.be.json;
+                    
+                done();
+                })
+        });
+        it('it should not make an order: invalid food name', (done) => {
+            const foodName = {name: 'greens'};
+            chai.request(server)
+                .post('/users/orders')
+                .send(foodName)
+                .set('authorization', `bearer ${token}`)
+                .end((err, res)=>{
+                    res.should.have.status(500);
+                    res.should.be.json;
+                    
+                done();
+                })
+        });
     });
     
 
@@ -64,11 +90,8 @@ describe('user Routes', () => {
                     res.should.be.json;
                     res.body.should.be.a('object');
                 done();
-                })
+                });
         });
     });
-
-    
-
 
 });

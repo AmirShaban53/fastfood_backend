@@ -45,10 +45,18 @@ export default class Menu{
 
     static deleteFood = async(req, res) =>{
         try {
+            const id = req.params.id;
+            const food = await Food.findOne({where:{food_id: id}});
+            if(food == null || food == undefined)
+            {
+                logger.error(`food of ID:${id} doesnot exist`,error);
+                return res.status(500).json({error: 'could not delete food'});
+            }
             
-            await Food.destroy({where: {food_id: req.params.id}})
+            await Food.destroy({where: {food_id: id}});
             logger.info('food has been deleted');
-            res.status(200).json("food has been deleted");
+            return res.status(200).json("food has been deleted");
+            
         } 
         catch (error) {
             logger.error("failed to delete food",error);

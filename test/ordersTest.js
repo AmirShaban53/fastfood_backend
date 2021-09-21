@@ -28,7 +28,8 @@ describe('orders route', () => {
             status: false,
             owner: 'that guy'
         }
-        await Order.sync({force: true}).then(()=>{Order.create(newOrder)});
+        await Order.sync({force: true});
+        await Order.create(newOrder);
         
     })
 
@@ -59,6 +60,17 @@ describe('orders route', () => {
                 done();
                 })
         });
+        it('it should not get order: invlaid ID', (done) => {
+            const id = 100;
+            chai.request(server)
+                .get(`/orders/${id}`)
+                .set('authorization', `bearer ${token}`)
+                .end((err, res)=>{
+                    res.should.status(500);
+                    res.should.be.json;
+                done();
+                })
+        });
     });
 
     describe('PATCH /orders/:ID', () => {
@@ -73,6 +85,19 @@ describe('orders route', () => {
                     res.should.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
+                done();
+                })
+        });
+        it('it should not edit an order: invalid ID', (done) => {
+            const id = 100;
+            const newOrder = {status: true}
+            chai.request(server)
+                .patch(`/orders/${id}`)
+                .send(newOrder)
+                .set('authorization', `bearer ${token}`)
+                .end((err, res)=>{
+                    res.should.status(500);
+                    res.should.be.json;
                 done();
                 })
         });

@@ -12,7 +12,7 @@ export default class Auth{
             const {email, password} = req.body;
             const users = await User.findAll({where:{email: email}});
             if(users.length >= 1){
-                logger.info('user email already exits');
+                logger.info('user email already exists');
                 return res.status(409).json('authenication failed');
             }
             else{

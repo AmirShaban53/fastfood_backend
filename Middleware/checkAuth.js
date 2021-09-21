@@ -8,6 +8,7 @@ const checkAuth = (req, res, next) =>{
         const payLoad = JWT.verify(token, process.env.JWT_KEY);
         req.userdata = payLoad;
         logger.info('JWT token found');
+        res.status(200);
         next();
     } 
     catch (error) {
