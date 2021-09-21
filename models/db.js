@@ -23,7 +23,6 @@ const connectDB = async() => {
             logger.info("connection to database made!");
 
         }else{
-
             logger.info("connection to test database made!");
         }
 

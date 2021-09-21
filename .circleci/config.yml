@@ -40,11 +40,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          name: run unit tests
-          command: npm run ci:test
-
-      - run:
-          name: code coverage
+          name: unit test &code coverage
           command: npm run coverage
 
       - store_artifacts:
