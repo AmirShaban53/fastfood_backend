@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: install npm packages
-          command: npm i
+          command: npm ci
 
       - save_cache:
           paths:
@@ -43,7 +43,7 @@ jobs:
       
       - run:
           name: unit test &code coverage
-          command: npm test
+          command: npm ci:test
 
       - store_artifacts:
           path: ./coverage/clover.xml
