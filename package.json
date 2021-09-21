@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "set NODE_ENV=test&& mocha --timeout 10000 --exit",
+    "test": "set NODE_ENV=test && mocha --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --timeout 10000 --ci --exit",
     "start": "nodemon -e yaml index.js",
     "coverage": "nyc npm run test "

@@ -12,7 +12,7 @@ const testConfig = `postgres://${process.env.PG_USERNAME}:${process.env.PG_PASSW
 
 
 
-const sequelize = new Sequelize(process.env.NODE_ENV === 'test'? testConfig : devConfig);
+const sequelize = new Sequelize(process.env.NODE_ENV === 'test '? testConfig : devConfig);
 
 const connectDB = async() => {
     try {
