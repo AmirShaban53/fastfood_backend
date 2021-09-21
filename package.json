@@ -15,7 +15,6 @@
     "instrument": true,
     "cache": true,
     "all": true,
-    
     "extension": [
       ".js",
       ".jsx",

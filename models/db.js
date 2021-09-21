@@ -17,7 +17,7 @@ const sequelize = new Sequelize(process.env.NODE_ENV === 'test '? testConfig : d
 const connectDB = async() => {
     try {
         await sequelize.authenticate();
-        if(process.env.NODE_ENV !== 'test'){
+        if(process.env.NODE_ENV !== 'test '){
             await sequelize.sync();
             logger.info("connection to database made!");
         }

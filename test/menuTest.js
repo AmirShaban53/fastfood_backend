@@ -26,13 +26,14 @@ describe('menu route', () => {
     
 
     describe('GET /menu/', () => {
-        it('it should get all the food items', async() => {
+        it('it should get all the food items', (done) => {
             chai.request(server)
                 .get('/menu')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
+                    done();
                 })
         }); 
          
