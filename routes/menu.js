@@ -1,13 +1,15 @@
 import { Router } from "express";
-import {checkAuth} from "../Middleware/checkAuth.js";
-import menu from '../Controller/menu.js';
+import checkAuth from "../middleware/checkAuth.js";
+import imageUpload from "../middleware/imageUpload.js";
+import menu from '../controller/menu.js';
+
 
 const router = Router();
 
 router.get('/', menu.getFoodList);
-router.post('/', checkAuth, menu.addFood);
-router.patch('/:id', menu.editFood);
-router.delete('/:id', checkAuth, menu.deleteFood);
+router.post('/', checkAuth(["admin"]), imageUpload.single('image'), menu.addFood);
+router.patch('/:id', checkAuth(["admin"]), menu.editFood);
+router.delete('/:id', checkAuth(["admin"]), menu.deleteFood);
 
 export default router;
 

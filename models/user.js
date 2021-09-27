@@ -1,11 +1,11 @@
 import sequelize from "./db.js";
 import Sequelize from 'sequelize';
 
-const User = sequelize.define('Users',{
-    user_id:{
-        type: Sequelize.INTEGER,
+const User = sequelize.define('user',{
+    id:{
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: Sequelize.UUIDV1,
         allowNull: false
     },
     email:{
@@ -20,6 +20,7 @@ const User = sequelize.define('Users',{
         type: Sequelize.STRING,
         allowNull: true
     }
-})
+}, {timestamps: false});
+
 
 export default User;

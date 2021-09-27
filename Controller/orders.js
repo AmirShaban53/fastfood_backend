@@ -1,5 +1,5 @@
 import logger from "../Middleware/logger.js";
-import Order from "../models/order.js";
+import {Order} from "../models/index.js";
 
 export default class orders{
 
@@ -7,7 +7,7 @@ export default class orders{
         try {
             const orderlist = await Order.findAll({});
             logger.info('this is a list of all the orders');
-            res.status(200).json({orders: orderlist});
+            res.status(200).json(orderlist);
         } 
         catch (error) {
             logger.error('failed to get list of orders',error);

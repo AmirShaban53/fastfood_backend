@@ -1,5 +1,5 @@
 import logger from "../Middleware/logger.js";
-import User from "../models/user.js";
+import {User} from "../models/index.js";
 import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -16,17 +16,32 @@ export default class Auth{
                 return res.status(409).json('authenication failed');
             }
             else{
-                bcrypt.hash(password, 10, (error, hash)=>{
-                    if(error){
-                        logger.error('failed to hash user password',error);
-                        return res.status(500).json({error: error.message});
+                bcrypt.hash(password, 10, async(error, hash)=>{
+                    try {
+                        if(error){
+                            logger.error('failed to hash user password',error);
+                            return res.status(500).json({error: error.message});
+                        }
+                        else{
+                            const userCount = await User.findAll({});
+                            if(userCount.length <= 0)
+                            {
+                                User.create({email: email, password: hash, role: 'admin'});
+                                logger.info('admin successfully created');
+                                return res.status(201).json('admin successfully created');
+                            }
+                            else{
+                                User.create({email: email, password: hash, role: 'user'});
+                                logger.info('user successfully created');
+                                return res.status(201).json('user successfully created');
+                            }
+                        }
+                    } 
+                    catch (error) {
+                        logger.error('user creation failed!',error);
+                        res.status(500).json(error);
                     }
-                    else{
-                        User.create({email: email, password: hash, role: 'user'});
-                        logger.info('user successfully created');
-                        return res.status(201).json('user successfully created');
-                    }
-                })
+                });
             }
         } 
         catch (error) {
@@ -54,14 +69,14 @@ export default class Auth{
                     if(result){
                         const token = JWT.sign(
                             {
-                                user_id: user.user_id,
+                                id: user.id,
                                 email: user.email,
                                 role: user.role
                             },
                             process.env.JWT_KEY,
                             {expiresIn: '1h'}
                         );
-                        return res.status(200).json({message: 'authentication successful', token: token});
+                        return res.status(200).json({message: 'authentication successful', token: token, role:user.role});
                     }
                     logger.error('user authentication has failed');
                     res.status(401).json('auth failed');

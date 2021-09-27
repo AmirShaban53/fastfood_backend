@@ -1,11 +1,11 @@
 import sequelize from "./db.js";
 import Sequelize from 'sequelize';
 
-const Food = sequelize.define('foods',{
-    food_id:{
-        type: Sequelize.INTEGER,
+const Food = sequelize.define('food',{
+    id:{
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV1,
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false
     },
     name:{
@@ -16,6 +16,10 @@ const Food = sequelize.define('foods',{
         type: Sequelize.INTEGER,
         allowNull: false
     },
-})
+    image:{
+        type: Sequelize.STRING,
+        allowNull: true
+    }
+},{timestamps: false});
 
 export default Food;

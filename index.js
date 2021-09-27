@@ -1,5 +1,4 @@
 import swaggerUi from 'swagger-ui-express';
-//import sequelize from './models/db.js';
 import express from 'express';
 import YAML from 'yamljs';
 import cors from 'cors';
@@ -22,6 +21,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use(express.json());
 app.use(cors());
 
+app.use('/uploads',express.static("uploads"));
 app.use('/auth', auth);
 app.use('/menu', menu);
 app.use('/orders', orders);

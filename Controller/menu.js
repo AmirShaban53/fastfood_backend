@@ -1,5 +1,5 @@
 import logger from "../Middleware/logger.js";
-import Food from '../models/food.js';
+import {Food} from '../models/index.js';
 
 
 export default class Menu{
@@ -8,7 +8,7 @@ export default class Menu{
         try {
             const foodList = await Food.findAll({});
             logger.info('list of all food items');
-            res.status(200).json({foodItems: foodList});
+            res.status(200).json(foodList);
         } 
         catch (error) {
             logger.error("server error ocurred",error);
@@ -18,8 +18,9 @@ export default class Menu{
 
     static addFood = async(req, res) =>{
         try {
+            logger.info(req.file);
             const {name, price} = req.body;
-            await Food.create({name: name, price:price});
+            await Food.create({name: name, price:price, image:req.file.path});
             logger.info('new food created');
             res.status(201).json("new food created");
         } 

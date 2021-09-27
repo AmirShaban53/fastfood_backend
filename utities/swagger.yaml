@@ -25,7 +25,7 @@ components:
           - name
           - price
         properties:
-          food_id:
+          id:
             type: integer
             description: this is the id for the food!
           name:
@@ -43,7 +43,7 @@ components:
           - owner
           - status
         properties:
-          order_id:
+          id:
             type: integer
             description: this is the id of the order
           name:
@@ -58,9 +58,6 @@ components:
           price:
             type: integer
             description: this is the total price
-          owner:
-            type: string
-            description: this is the owner of the order
           status:
             type: boolean
             description: this is the status of the order
@@ -71,7 +68,7 @@ components:
           - email
           - password
         properties:
-          user_id:
+          id:
             type: integer
             description: this is the id of the user
           email:
@@ -96,7 +93,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
+              properties:
+                email:
+                  type: string
+                  description: this is the email of the user
+                password:
+                  type: string
+                  description: this is the password of the user
+          
       responses:
         201:
           description: new user created!
@@ -113,7 +117,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
+              email:
+                  type: string
+                  description: this is the email of the user
+              password:
+                type: string
+                description: this is the password of the user
       responses:
         200:
           description: user logged in!
@@ -121,8 +130,6 @@ paths:
           description: authenitcation failed
         500:
           description: server error occurred
-
-
 
   /menu:
     get:
@@ -148,7 +155,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/food'
+              properties:
+                name:
+                  type: string
+                  description: this is the name of the food
+                price:
+                  type: integer
+                  description: this is the price of the food
       responses:
         201:
           description: new food added!
@@ -156,7 +169,7 @@ paths:
           description: authenitcation failed
         500:
           description: server error occurred
-  /menu/{id}:
+  /menu/{food_id}:
     patch:
       summary: edit a food item's properties
       tags: [food]
@@ -175,7 +188,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/food'
+              properties:
+                name:
+                  type: string
+                  description: this is the name of the food
+                price:
+                  type: integer
+                  description: this is the price of the food
+              
       responses:
         200:
           description: food updated!
@@ -221,7 +241,6 @@ paths:
           description: authenitcation failed
         500:
           description: server error occurred
-  
   /orders/{id}:
     get:
       summary: get an individual user order
@@ -264,7 +283,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/order'
+              properties:
+                status:
+                  type: boolean
+                  description: this is the status of the order
       responses:
         200:
           description: order updated!
@@ -301,7 +323,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/order'
+              properties:
+                name:
+                  type: string
+                  description: this is the name of the food
       responses:
         200:
           description: order made!

@@ -1,11 +1,13 @@
+import User from "./user.js";
 import sequelize from "./db.js";
 import Sequelize from 'sequelize';
 
-const Order = sequelize.define('Orders',{
-    order_id:{
-        type: Sequelize.INTEGER,
+const Order = sequelize.define('order',{
+    id:{
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: Sequelize.UUIDV1,
+
         allowNull: false
     },
     name:{
@@ -24,15 +26,11 @@ const Order = sequelize.define('Orders',{
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    owner:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     status:{
         type: Sequelize.BOOLEAN,
         allowNull: false
     }
 
-})
+}, {timestamps: false});
 
 export default Order;
