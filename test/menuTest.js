@@ -4,12 +4,13 @@ import server from '../index.js';
 import JWT from 'jsonwebtoken';
 import 'dotenv/config.js'
 
-import Food from '../models/food.js';
+
+import { Food } from '../models/index.js';
 
 
 const should = chai.should();
 chai.use(chaiHttp);
-
+let id;
 const token = JWT.sign(
     {
         role: 'admin'
@@ -22,6 +23,8 @@ describe('menu route', () => {
 
     before(async()=>{
         await Food.sync({force: true});
+        const testFood = await Food.create({name:"water", price: 100});
+        id = testFood.id;
     })
     
 
@@ -32,7 +35,7 @@ describe('menu route', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.be.json;
-                    res.body.should.be.a('object');
+                    res.body.should.be.a('array');
                     done();
                 })
         }); 
@@ -99,11 +102,9 @@ describe('menu route', () => {
 
     describe('PATCH /menu/:ID', () => {
         it('it should edit an existing food', (done) => {
-            const food = {
-                name: 'chicken',
-                price: 10000
-            }
-            const id = 1;
+
+            const food = {name: 'chicken',price: 10000}
+            console.log(id);
             chai.request(server)
                 .patch(`/menu/${id}`)
                 .send(food)
@@ -113,25 +114,25 @@ describe('menu route', () => {
                     res.should.be.json;
                 done();
                 })
+
         }); 
         it('it should not edit food because of invalid data entry', (done) => {
-            const food = {name: 100,price: 'tree'}
-            const id = 1;
-            chai.request(server)
-                .patch(`/menu/${id}`)
-                .send(food)
-                .set('authorization', `bearer ${token}`)
-                .end((err, res) => {
-                    res.should.have.status(500);
-                    res.should.be.json;
-                done();
-                })
+            
+                const food = {name: 100, price:'tree'}
+                chai.request(server)
+                    .patch(`/menu/${id}`)
+                    .send(food)
+                    .set('authorization', `bearer ${token}`)
+                    .end((err, res) => {
+                        res.should.have.status(500);
+                        res.should.be.json;
+                    done();
+                    })
         });
     });
 
     describe('DELETE /menu/', () => {
         it('it should delete a food item', (done) => {
-            const id = 1
             chai.request(server)
                 .delete(`/menu/${id}`)
                 .set('authorization', `bearer ${token}`)
@@ -141,7 +142,7 @@ describe('menu route', () => {
                 done();
                 })
         }); 
-        it('it should delete a food item because of invalid ID', (done) => {
+        it('it not should delete a food item because of invalid ID', (done) => {
             const id = 100
             chai.request(server)
                 .delete(`/menu/${id}`)

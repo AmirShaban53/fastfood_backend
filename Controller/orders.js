@@ -17,7 +17,7 @@ export default class orders{
 
     static getOrder = async(req, res)=>{
         try {
-            const order = await Order.findOne({where:{order_id: req.params.id}})
+            const order = await Order.findOne({where:{id: req.params.id}})
             if(order == null || order == undefined){
                 logger.error('invalid order ID');
                 return res.status(500).json({error: 'failed to get order'});
@@ -34,12 +34,12 @@ export default class orders{
     static editOrder = async(req, res)=>{
         try {
             const data = {status: true}
-            const orderID = await Order.findOne({where:{order_id: req.params.id}})
+            const orderID = await Order.findOne({where:{id: req.params.id}})
             if(orderID == null || orderID == undefined){
                 logger.error('invalid order ID');
                 return res.status(500).json({error: 'failed to get order'});
             }
-            const order = await Order.update(data, {where:{order_id: req.params.id}})
+            const order = await Order.update(data, {where:{id: req.params.id}})
             logger.info(`${order.name} has been successfully updated!`);
             res.status(200).json({message: `${order.name} has been successfully updated!`});
         } 

@@ -1,43 +1,53 @@
 import chai from"chai";
 import chaiHttp from "chai-http";
 import server from '../index.js';
-import Order from "../models/order.js";
-import Food from "../models/food.js";
+import { Order, User, Food} from "../models/index.js";
 import JWT from 'jsonwebtoken';
 import 'dotenv/config.js'
 
 chai.should();
 chai.use(chaiHttp);
 
-const token = JWT.sign(
-    {
-        role: 'admin'
-    },
-    process.env.JWT_KEY,
-    {expiresIn : '1h'}
-)
+let userId;
+let token; 
 
 
-const food = {
-    name: 'rice',
-    quantity: 2,
-    unit_Price: 100,
-    price: 100* 2,
-    status: false,
-    owner: 'that guy'
-}
+let order;
 
 describe('user Routes', () => {
     
     before(async()=>{
         await Food.sync({force: true});
         await Order.sync({force: true});
-        await Food.create({name: food.name, price: food.unit_Price});
+        await User.sync({force: true});
+
+        const user = await User.create({email:"user@gmail.com", password:"password"});
+        const food = await Food.create({name:"water", price: 100});
+        // const newOrder = {
+        //     name: food.name,
+        //     quantity: 2,
+        //     unit_Price: food.price,
+        //     price: food.price* 2,
+        //     status: false,
+        //     foodId: food.id
+        // }
+        // await user.createOrder(newOrder);
+        userId = user.id;
+        token = JWT.sign(
+            {
+                id: userId,
+                role: 'admin'
+            },
+            process.env.JWT_KEY,
+            {expiresIn : '1h'}
+        )
+        
     })
 
 
     describe('POST /users/orders', () => {
         it('it should make or post a new order', (done) => {
+            const food = {name: "water"};
             chai.request(server)
                 .post('/users/orders')
                 .send(food)
@@ -88,7 +98,7 @@ describe('user Routes', () => {
                 .end((err, res)=>{
                     res.should.have.status(200);
                     res.should.be.json;
-                    res.body.should.be.a('object');
+                    res.body.should.be.a('array');
                 done();
                 });
         });

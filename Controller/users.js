@@ -14,19 +14,16 @@ export default class users{
             }
             else{
                 
-                const user = await User.findOne({where:{id: req.userData.id}})
-                logger.info(req.userData.id);
-                logger.info(user.id);
+                const user = await User.findOne({where:{id: req.userData.id}});
                 const newOrder = {
                     name: food.name,
                     quantity: 2,
                     unit_Price: food.price,
                     price: food.price* 2,
-                    status: false
+                    status: false,
+                    foodId: food.id
                 }
-                // await Order.create(newOrder);
                 user.createOrder(newOrder);
-                // User.createOrder
                 logger.info('new order made by user');
                 res.status(201).json("order created successfully!");
             }

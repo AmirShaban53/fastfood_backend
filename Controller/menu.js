@@ -18,9 +18,8 @@ export default class Menu{
 
     static addFood = async(req, res) =>{
         try {
-            logger.info(req.file);
             const {name, price} = req.body;
-            await Food.create({name: name, price:price, image:req.file.path});
+            await Food.create({name: name, price:price});
             logger.info('new food created');
             res.status(201).json("new food created");
         } 
@@ -34,7 +33,7 @@ export default class Menu{
         try {
             const {name, price} = req.body;
             const data = {name: name, price: price, id:req.params.id};
-            await Food.update(data, {where:{food_id: data.id}})
+            await Food.update(data, {where:{id: data.id}})
             logger.info('food has been updated');
             res.status(200).json("food has been updated!");
         } 
@@ -47,14 +46,14 @@ export default class Menu{
     static deleteFood = async(req, res) =>{
         try {
             const id = req.params.id;
-            const food = await Food.findOne({where:{food_id: id}});
+            const food = await Food.findOne({where:{id: id}});
             if(food == null || food == undefined)
             {
                 logger.error(`food of ID:${id} doesnot exist`,error);
                 return res.status(500).json({error: 'could not delete food'});
             }
             
-            await Food.destroy({where: {food_id: id}});
+            await Food.destroy({where: {id: id}});
             logger.info('food has been deleted');
             return res.status(200).json("food has been deleted");
             

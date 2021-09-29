@@ -1,12 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../index.js';
-import Order from '../models/order.js';
+import {Order} from '../models/index.js';
 import JWT from 'jsonwebtoken';
 
 chai.should();
 chai.use(chaiHttp);
 
+let id;
 const token = JWT.sign(
     {
         role: 'admin'
@@ -26,10 +27,11 @@ describe('orders route', () => {
             unit_Price: 100,
             price: 100 * 2,
             status: false,
-            owner: 'that guy'
+            foodid: null
         }
         await Order.sync({force: true});
-        await Order.create(newOrder);
+        const order = await Order.create(newOrder);
+        id = order.id;
         
     })
 
@@ -41,7 +43,7 @@ describe('orders route', () => {
                 .end((err, res)=>{
                     res.should.status(200);
                     res.should.be.json;
-                    res.body.should.be.a('object');
+                    res.body.should.be.a('array');
                 done();
                 })
         });
@@ -49,7 +51,6 @@ describe('orders route', () => {
 
     describe('GET /orders/:ID', () => {
         it('it should get an individual order', (done) => {
-            const id = 1;
             chai.request(server)
                 .get(`/orders/${id}`)
                 .set('authorization', `bearer ${token}`)
@@ -75,7 +76,6 @@ describe('orders route', () => {
 
     describe('PATCH /orders/:ID', () => {
         it('it should edit an order', (done) => {
-            const id = 1;
             const newOrder = {status: true}
             chai.request(server)
                 .patch(`/orders/${id}`)
@@ -88,19 +88,19 @@ describe('orders route', () => {
                 done();
                 })
         });
-        it('it should not edit an order: invalid ID', (done) => {
-            const id = 100;
-            const newOrder = {status: true}
-            chai.request(server)
-                .patch(`/orders/${id}`)
-                .send(newOrder)
-                .set('authorization', `bearer ${token}`)
-                .end((err, res)=>{
-                    res.should.status(500);
-                    res.should.be.json;
-                done();
-                })
-        });
+            it('it should not edit an order: invalid ID', (done) => {
+                const id = 100;
+                const newOrder = {status: true}
+                chai.request(server)
+                    .patch(`/orders/${id}`)
+                    .send(newOrder)
+                    .set('authorization', `bearer ${token}`)
+                    .end((err, res)=>{
+                        res.should.status(500);
+                        res.should.be.json;
+                    done();
+                    })
+            });
     });
     
 
