@@ -45,7 +45,7 @@ jobs:
 
       - run:
           name: unit test &code coverage
-          command: npm run coverage:coveralls
+          command: npm run coverage
 
       - store_artifacts:
           path: ./coverage/clover.xml
