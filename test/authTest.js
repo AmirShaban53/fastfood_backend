@@ -10,6 +10,7 @@ describe('auth route', () => {
 
     before(async()=>{
         await User.sync({force: true});
+        await User.create({email:"test2@test.com",password: "password"})
     })
 
     describe('POST /auth/signup', () => {
@@ -42,7 +43,7 @@ describe('auth route', () => {
         });
         it('it should fail because user already exists', (done) => {
             const newUser = {
-                email: "test@test.com",
+                email: "test2@test.com",
                 password: "password"
             }
             chai.request(server)
