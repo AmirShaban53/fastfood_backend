@@ -43,6 +43,10 @@ jobs:
           name: unit tests
           command: npm run ci:test
 
+      - run:
+          name: code coverage
+          command: npm run coverage
+
       
 
       - store_artifacts:
