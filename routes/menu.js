@@ -1,7 +1,7 @@
 import { Router } from "express";
 import checkAuth from "../Middleware/checkAuth.js";
 import imageUpload from "../Middleware/imageUpload.js";
-import menu from '../controller/menu.js';
+import menu from '../Controller/menu.js';
 
 
 const router = Router();
