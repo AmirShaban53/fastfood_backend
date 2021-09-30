@@ -4,8 +4,7 @@ import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import 'dotenv/config.js';
 
-
-export default class auth{
+export default class Auth{
     
     static signUp = async(req, res)=>{
         try {
