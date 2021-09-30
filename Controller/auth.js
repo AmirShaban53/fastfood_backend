@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import 'dotenv/config.js';
 
 
-export default class Auth{
+export default class auth{
     
     static signUp = async(req, res)=>{
         try {
