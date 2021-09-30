@@ -10,7 +10,6 @@
     "ci:test": "set NODE_ENV=test&& mocha --ci --exit",
     "coverage": "c8 npm test"
   },
-  
   "author": "AMIR BUDDA SHABAN",
   "license": "ISC",
   "dependencies": {
