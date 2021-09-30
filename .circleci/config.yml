@@ -41,7 +41,7 @@ jobs:
 
       - run:
           name: unit tests
-          command: npm ci:test
+          command: npm test
 
       - run:
           name: unit test &code coverage

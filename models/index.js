@@ -4,6 +4,7 @@ import User from "./user.js";
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
 Food.hasMany(Order);
 Order.belongsTo(Food);
 

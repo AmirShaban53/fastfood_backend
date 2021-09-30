@@ -8,7 +8,7 @@
     "start": "nodemon -e yaml index.js",
     "test": "set NODE_ENV=test&& mocha --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --ci --exit",
-    "coverage": "nyc npm test",
+    "coverage": "c8 npm test",
     "coverage:coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
