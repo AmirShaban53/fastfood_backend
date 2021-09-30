@@ -2,8 +2,8 @@ import logger from "../Middleware/logger.js";
 import {User} from "../models/index.js";
 import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-
 import 'dotenv/config.js';
+
 
 export default class Auth{
     
@@ -54,7 +54,6 @@ export default class Auth{
     static login = async(req, res)=>{
         try {
             const {email, password} = req.body;
-
             const user = await User.findOne({where:{email: email}});
             if(user == null || user == undefined){
                 logger.error(`user email: ${email} doesnot exist`);
