@@ -11,11 +11,11 @@ import menu from './routes/menu.js';
 import orders from './routes/orders.js';
 import users from './routes/users.js';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-const swaggerDoc = YAML.load('./utities/swagger.yaml');
+const swaggerDoc = YAML.load('./config/swagger.yaml');
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use(express.json());
