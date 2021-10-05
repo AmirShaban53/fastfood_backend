@@ -8,7 +8,7 @@
     "test": "set NODE_ENV=test&& nyc mocha --require @babel/register --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --ci --require @babel/register --exit",
     "coverage": "nyc npm run test",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm run test && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc":{
     "reporter": ["lcov", "text-summary", "html"]
