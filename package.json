@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -e yaml --exec babel-node index.js",
-    "test": "set NODE_ENV=test&& nyc mocha --require @babel/register --timeout 10000 --exit",
+    "test": "set NODE_ENV=test&& mocha --require @babel/register --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --ci --require @babel/register --exit",
     "coverage": "nyc npm run test",
-    "coveralls": "nyc npm run test && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "set COVERALLS_REPO_TOKEN=QrMge4BNO0opUVaETi2WGv3o6558XxiWq&& nyc report --reporter=text-lcov | coveralls"
   },
   "nyc":{
     "reporter": ["lcov", "text-summary", "html"]

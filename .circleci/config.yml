@@ -61,11 +61,7 @@ jobs:
       - store_test_results:
           path: ./test-results
 
-notify:
-  webhooks:
-    - url: https://coveralls.io/webhook?repo_token=${process.env.COVERALLS_TOKEN}
-          
-      
+
 
 workflows:
   build_test:
