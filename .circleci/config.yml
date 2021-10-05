@@ -44,14 +44,14 @@ jobs:
 
       - run:
           name: unit tests 
-          command: npm run ci:test
+          command: npm run test
 
       - run:
           name: code coverage
-          command: npm run coverage
+          command: npm run coveralls
 
+    # - coveralls/upload
       
-      - coveralls/upload
       - store_artifacts:
           path: ./test-results
           prefix: tests
