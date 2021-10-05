@@ -51,15 +51,19 @@ jobs:
           command: npm run coverage
 
       
-
+      - coveralls/upload
       - store_artifacts:
-          path: ./coverage/clover.xml
+          path: ./test-results
           prefix: tests
       - store_artifacts:
           path: coverage
           prefix: coverage
       - store_test_results:
-          path: ./coverage/clover.xml
+          path: ./test-results
+
+notify:
+  webhooks:
+    - url: https://coveralls.io/webhook?repo_token=${process.env.COVERALLS_TOKEN}
           
       
 
