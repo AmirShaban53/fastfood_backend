@@ -1,5 +1,6 @@
 import logger from "../Middleware/logger.js";
 import {Food} from '../models/index.js';
+import fs from 'fs';
 
 
 export default class Menu{
@@ -19,7 +20,7 @@ export default class Menu{
     static addFood = async(req, res) =>{
         try {
             const {name, price} = req.body;
-            await Food.create({name: name, price:price});
+            await Food.create({name: name, price:price , image: req.file.path});
             logger.info('new food created');
             res.status(201).json("new food created");
         } 
@@ -32,7 +33,7 @@ export default class Menu{
     static editFood = async(req, res) =>{
         try {
             const {name, price} = req.body;
-            const data = {name: name, price: price, id:req.params.id};
+            const data = {name: name, price: price, image: req.file.path, id:req.params.id};
             await Food.update(data, {where:{id: data.id}})
             logger.info('food has been updated');
             res.status(200).json("food has been updated!");
@@ -52,8 +53,16 @@ export default class Menu{
                 logger.error(`food of ID:${id} doesnot exist`,error);
                 return res.status(500).json({error: 'could not delete food'});
             }
-            
+            logger.info(food.image);
+            fs.unlink(`./${food.image}`, (err) =>{ 
+                if(err){
+                    logger.error('image not found',err);
+                    return
+                }
+                
+            })
             await Food.destroy({where: {id: id}});
+
             logger.info('food has been deleted');
             return res.status(200).json("food has been deleted");
             

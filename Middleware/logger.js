@@ -1,5 +1,4 @@
-import pkg from 'winston';
-const { createLogger, format, transports } = pkg;
+import { createLogger, format, transports } from 'winston';
 
 const logger = createLogger({
     transports: [

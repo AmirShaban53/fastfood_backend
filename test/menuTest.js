@@ -2,7 +2,8 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../index.js';
 import JWT from 'jsonwebtoken';
-import 'dotenv/config.js'
+import 'dotenv/config.js';
+import fs from 'fs';
 
 
 import { Food } from '../models/index.js';
@@ -51,8 +52,10 @@ describe('menu route', () => {
 
             chai.request(server)
                 .post('/menu')
-                .send(food)
                 .set('authorization', `bearer ${token}`)
+                .field('Content-Type', `multipart/form-data`)
+                .field({name: food.name, price: food.price})
+                .attach('image', 'test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.should.be.json;

@@ -1,8 +1,7 @@
-import User from "./user.js";
 import sequelize from "./db.js";
 import Sequelize from 'sequelize';
 
-const Order = sequelize.define('order',{
+const Order = sequelize.define("orders",{
     id:{
         type: Sequelize.UUID,
         primaryKey: true,
