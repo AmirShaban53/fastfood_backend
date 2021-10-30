@@ -55,7 +55,7 @@ describe('menu route', () => {
                 .set('authorization', `bearer ${token}`)
                 .field('Content-Type', `multipart/form-data`)
                 .field({name: food.name, price: food.price})
-                .attach('image', 'test/img.jpg')
+                .attach('image', './test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.should.be.json;
