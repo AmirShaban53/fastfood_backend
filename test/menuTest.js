@@ -53,6 +53,7 @@ describe('menu route', () => {
             chai.request(server)
                 .post('/menu')
                 .set('authorization', `bearer ${token}`)
+                .set('Accept', 'application/json')
                 .field('Content-Type', `multipart/form-data`)
                 .field({name: food.name, price: food.price})
                 .attach('image', './test/img.jpg')
@@ -70,7 +71,7 @@ describe('menu route', () => {
                 .set('authorization', `bearer ${token}`)
                 .field('Content-Type', `multipart/form-data`)
                 .field({price: food.price})
-                .attach('image', 'test/img.jpg')
+                .attach('image', './test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.should.be.json;
@@ -85,7 +86,7 @@ describe('menu route', () => {
                 .set('authorization', `bearer ${token}`)
                 .field('Content-Type', `multipart/form-data`)
                 .field({name: food.name})
-                .attach('image', 'test/img.jpg')
+                .attach('image', './test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.should.be.json;
