@@ -7,6 +7,7 @@ import fs from 'fs';
 
 
 import { Food } from '../models/index.js';
+import path from 'path';
 
 
 const should = chai.should();
@@ -53,10 +54,9 @@ describe('menu route', () => {
             chai.request(server)
                 .post('/menu')
                 .set('authorization', `bearer ${token}`)
-                .set('Accept', 'application/json')
                 .field('Content-Type', `multipart/form-data`)
                 .field({name: food.name, price: food.price})
-                .attach('image', './test/img.jpg')
+                .attach('image', path.resolve(__dirname,'img.jpg'))
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.should.be.json;
