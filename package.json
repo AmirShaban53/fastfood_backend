@@ -10,8 +10,12 @@
     "coverage": "nyc npm run test",
     "coveralls": "set COVERALLS_REPO_TOKEN=QrMge4BNO0opUVaETi2WGv3o6558XxiWq&& nyc report --reporter=text-lcov | coveralls"
   },
-  "nyc":{
-    "reporter": ["lcov", "text", "html"]
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
   },
   "author": "AMIR BUDDA SHABAN",
   "license": "ISC",

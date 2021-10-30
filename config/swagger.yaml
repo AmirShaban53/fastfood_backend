@@ -6,6 +6,7 @@ info:
 
 servers:
     - url: http://localhost:5000
+    - url: https://salsa-backend.herokuapp.com/
 
 components: 
 
