@@ -4,7 +4,7 @@
   "description": "backend of fast food web app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e yaml --exec babel-node index.js",
+    "start": " babel-node index.js",
     "test": "set NODE_ENV=test&& mocha --require @babel/register --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --ci --require @babel/register --exit",
     "coverage": "nyc npm run test",
