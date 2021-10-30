@@ -67,8 +67,10 @@ describe('menu route', () => {
 
             chai.request(server)
                 .post('/menu')
-                .send(food)
                 .set('authorization', `bearer ${token}`)
+                .field('Content-Type', `multipart/form-data`)
+                .field({price: food.price})
+                .attach('image', 'test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.should.be.json;
@@ -80,8 +82,10 @@ describe('menu route', () => {
 
             chai.request(server)
                 .post('/menu')
-                .send(food)
                 .set('authorization', `bearer ${token}`)
+                .field('Content-Type', `multipart/form-data`)
+                .field({name: food.name})
+                .attach('image', 'test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.should.be.json;
@@ -106,12 +110,13 @@ describe('menu route', () => {
     describe('PATCH /menu/:ID', () => {
         it('it should edit an existing food', (done) => {
 
-            const food = {name: 'chicken',price: 10000}
-            console.log(id);
+            const food = {name: 'chicken'}
             chai.request(server)
                 .patch(`/menu/${id}`)
                 .send(food)
                 .set('authorization', `bearer ${token}`)
+                // .field('Content-Type', `multipart/form-data`)
+                // .field({name: food.name})
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.be.json;

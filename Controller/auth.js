@@ -56,7 +56,7 @@ export default class Auth{
             const user = await User.findOne({where:{email: email}});
             if(user == null || user == undefined){
                 logger.error(`user email: ${email} doesnot exist`);
-                return res.status(401).json('auth budda failed');
+                return res.status(401).json('auth failed');
             }
             else{
                 bcrypt.compare(password, user.password, (error, result)=>{
@@ -74,7 +74,7 @@ export default class Auth{
                             process.env.JWT_KEY,
                             {expiresIn: '1h'}
                         );
-                        return res.status(200).json({message: 'authentication successful', token: token, role:user.role});
+                        return res.status(200).json({message: 'authentication successful', token: token});
                     }
                     logger.error('user authentication has failed');
                     res.status(401).json('auth failed');
