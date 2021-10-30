@@ -17,17 +17,25 @@ const pool = {
 }
 
 
-const sequelize = new Sequelize(process.env.NODE_ENV === 'test'? testConfig : devConfig, {pool: pool});
+let sequelize;
 
 const connectDB = async() => {
     try {
+        if(process.env.NODE_ENV==='test'){
+            sequelize = new Sequelize(testConfig,{pool: pool});
+            logger.info("connection to test database made!");
+        }
+        else if(process.env.NODE_ENV==='production'){
+            sequelize = new Sequelize(productionConfig,{pool: pool});
+            logger.info("connection to production database made!");
+        }
+        else{
+            sequelize = new Sequelize(devConfig,{pool: pool});
+            logger.info("connection to database made!");
+        }
         await sequelize.authenticate();
         if(process.env.NODE_ENV !== 'test'){
             sequelize.sync();
-            logger.info("connection to database made!");
-        }
-        else{
-            logger.info("connection to test database made!");
         }
     } 
     catch (error) {
