@@ -58,8 +58,14 @@ describe('menu route', () => {
                 .field({name: food.name, price: food.price})
                 .attach('image', path.resolve(__dirname,'img.jpg'))
                 .end((err, res) => {
-                    res.should.have.status(201);
-                    res.should.be.json;
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.should.have.status(201);
+                        res.should.be.json;
+
+                    }
                 done();
                 })
         }); 
