@@ -56,16 +56,9 @@ describe('menu route', () => {
                 .set('authorization', `bearer ${token}`)
                 .field('Content-Type', `multipart/form-data`)
                 .field({name: food.name, price: food.price})
-                .attach('image', path.resolve(__dirname,'img.jpg'))
                 .end((err, res) => {
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        res.should.have.status(201);
-                        res.should.be.json;
-
-                    }
+                    res.should.have.status(201);
+                    res.should.be.json;
                 done();
                 })
         }); 
@@ -77,7 +70,6 @@ describe('menu route', () => {
                 .set('authorization', `bearer ${token}`)
                 .field('Content-Type', `multipart/form-data`)
                 .field({price: food.price})
-                .attach('image', './test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.should.be.json;
@@ -92,7 +84,6 @@ describe('menu route', () => {
                 .set('authorization', `bearer ${token}`)
                 .field('Content-Type', `multipart/form-data`)
                 .field({name: food.name})
-                .attach('image', './test/img.jpg')
                 .end((err, res) => {
                     res.should.have.status(500);
                     res.should.be.json;
