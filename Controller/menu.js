@@ -32,11 +32,20 @@ export default class Menu{
 
     static editFood = async(req, res) =>{
         try {
-            const {name, price} = req.body;
-            const data = {name: name, price: price, id:req.params.id};
-            await Food.update(data, {where:{id: data.id}})
-            logger.info('food has been updated');
-            res.status(200).json("food has been updated!");
+            if(typeof req.file !=='undefined'){
+                const {name, price} = req.body;
+                const data = {name: name, price: price, image: req.file.path, id:req.params.id};
+                await Food.update(data, {where:{id: data.id}})
+                logger.info('food has been updated');
+                res.status(200).json("food has been updated!");
+            }
+            else{
+                const {name, price} = req.body;
+                const data = {name: name, price: price, id:req.params.id};
+                await Food.update(data, {where:{id: data.id}})
+                logger.info('food has been updated');
+                res.status(200).json("food has been updated!");
+            }
         } 
         catch (error) {
             logger.error("failed to update food",error);

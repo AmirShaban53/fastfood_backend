@@ -120,10 +120,9 @@ describe('menu route', () => {
             const food = {name: 'chicken'}
             chai.request(server)
                 .patch(`/menu/${id}`)
-                .send(food)
                 .set('authorization', `bearer ${token}`)
-                // .field('Content-Type', `multipart/form-data`)
-                // .field({name: food.name})
+                .field('Content-Type', `multipart/form-data`)
+                .field({name: food.name})
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.be.json;
