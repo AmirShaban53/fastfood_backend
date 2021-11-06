@@ -36,7 +36,7 @@ export default class users{
 
     static getOrderHistory = async(req, res) =>{
         try {
-            const completedOrders = await Order.findAll({});
+            const completedOrders = await Order.findAll({where: {userId: req.userData.id}});
             logger.info('this your list of completed orders');
             res.status(200).json(completedOrders);
         } 

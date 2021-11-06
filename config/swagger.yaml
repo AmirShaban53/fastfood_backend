@@ -277,7 +277,7 @@ paths:
           name: order_id
           required: true
           schema:
-            type: integer
+            type: string
           description: the order id
       requestBody:
         required: true

@@ -20,7 +20,7 @@ const checkAuth= (role) => {
         } 
         catch (error) {
             logger.error('token not found!', error);
-                return res.status(401).json({message:"auth failed"});
+            return res.status(401).json({message:"auth failed"});
         }
     }
 }

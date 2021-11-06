@@ -6,10 +6,10 @@ import cors from 'cors';
 import logger from './Middleware/logger.js';
 
 
-import auth from './routes/auth.js';
-import menu from './routes/menu.js';
 import orders from './routes/orders.js';
 import users from './routes/users.js';
+import auth from './routes/auth.js';
+import menu from './routes/menu.js';
 
 const PORT = process.env.PORT || 5000;
 
