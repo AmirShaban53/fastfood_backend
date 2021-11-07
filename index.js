@@ -21,6 +21,9 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res)=>{
+    res.send('fastfood API');
+})
 app.use('/uploads',express.static("uploads"));
 app.use('/auth', auth);
 app.use('/menu', menu);
