@@ -26,7 +26,10 @@ const connectDB = async() => {
             logger.info("connection to test database made!");
         }
         else if(process.env.NODE_ENV==='production'){
-            sequelize = new Sequelize(productionConfig,{pool: pool, ssl: ssl});
+            sequelize = new Sequelize(productionConfig,{
+                pool: pool, 
+                dialectOptions: {ssl: true}
+            });
             logger.info("connection to production database made!");
         }
         else{
