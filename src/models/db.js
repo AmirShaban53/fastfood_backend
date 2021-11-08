@@ -13,7 +13,10 @@ const pool = {
     acquire: 3000,
     idle: 1000
 }
-
+const ssl = {
+    require: true,
+    rejectUnauthorized: false
+}
 let sequelize;
 
 const connectDB = async() => {
@@ -23,7 +26,7 @@ const connectDB = async() => {
             logger.info("connection to test database made!");
         }
         else if(process.env.NODE_ENV==='production'){
-            sequelize = new Sequelize(productionConfig,{pool: pool});
+            sequelize = new Sequelize(productionConfig,{pool: pool, ssl: ssl});
             logger.info("connection to production database made!");
         }
         else{
