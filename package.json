@@ -8,7 +8,11 @@
     "npm": "6.14.15"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node index.js",
+    "build-babel": "babel -d ./build ./src -s",
+    "clean": " rm -rf build && mkdir build",
+    "build":"npm run clean && npm run build-babel",
+    "start":"npm run build && node ./build/index.js",
+    "dev-start": "nodemon --exec babel-node ./src/index.js",
     "test": "set NODE_ENV=test&& mocha --require @babel/register --timeout 10000 --exit",
     "ci:test": "set NODE_ENV=test&& mocha --ci --require @babel/register --exit",
     "coverage": "nyc npm run test",
@@ -40,12 +44,12 @@
     "pg": "^8.7.1"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "coveralls": "^3.1.1",
-    "nodemon": "^2.0.12",
     "dotenv": "^10.0.0",
     "mocha": "^9.1.0",
-    "chai": "^4.3.4",
+    "nodemon": "^2.0.12",
     "nyc": "^15.1.0"
   }
 }

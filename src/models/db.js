@@ -1,6 +1,7 @@
 import logger from '../Middleware/logger.js';
 import Sequelize from 'sequelize';
-import 'dotenv/config.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const productionConfig= process.env.DATABASE_URL;
 

@@ -2,7 +2,8 @@ import logger from "../Middleware/logger.js";
 import { User } from "../models/index.js";
 import JWT from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import 'dotenv/config.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default class Auth{
     

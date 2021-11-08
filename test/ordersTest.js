@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../index.js';
-import {Order} from '../models/index.js';
+import server from '../src/index.js';
+import {Order} from '../src/models/index.js';
 import JWT from 'jsonwebtoken';
 
 chai.should();

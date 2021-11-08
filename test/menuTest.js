@@ -1,12 +1,12 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../index.js';
+import server from '../src/index.js';
 import JWT from 'jsonwebtoken';
 import 'dotenv/config.js';
 import fs from 'fs';
 
 
-import { Food } from '../models/index.js';
+import { Food } from '../src/models/index.js';
 import path from 'path';
 
 

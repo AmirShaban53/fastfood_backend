@@ -1,6 +1,7 @@
 import  jwt  from "jsonwebtoken";
 import logger from "./logger.js";
-import 'dotenv/config.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const checkAuth= (role) => {
     return (req, res, next) => {

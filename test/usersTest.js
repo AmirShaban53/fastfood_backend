@@ -1,9 +1,9 @@
 import chai from"chai";
 import chaiHttp from "chai-http";
-import server from '../index.js';
-import { Order, User, Food} from "../models/index.js";
+import server from '../src/index.js';
+import { Order, User, Food} from "../src/models/index.js";
 import JWT from 'jsonwebtoken';
-import 'dotenv/config.js'
+import 'dotenv/config.js';
 
 chai.should();
 chai.use(chaiHttp);
@@ -11,8 +11,6 @@ chai.use(chaiHttp);
 let userId;
 let token; 
 
-
-let order;
 
 describe('user Routes', () => {
     
@@ -23,15 +21,6 @@ describe('user Routes', () => {
 
         const user = await User.create({email:"user@gmail.com", password:"password"});
         const food = await Food.create({name:"water", price: 100});
-        // const newOrder = {
-        //     name: food.name,
-        //     quantity: 2,
-        //     unit_Price: food.price,
-        //     price: food.price* 2,
-        //     status: false,
-        //     foodId: food.id
-        // }
-        // await user.createOrder(newOrder);
         userId = user.id;
         token = JWT.sign(
             {
