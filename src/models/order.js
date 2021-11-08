@@ -6,7 +6,6 @@ const Order = sequelize.define("orders",{
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV1,
-
         allowNull: false
     },
     name:{
