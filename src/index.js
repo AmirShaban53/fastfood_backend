@@ -4,6 +4,7 @@ import YAML from 'yamljs';
 import cors from 'cors';
 
 import logger from './Middleware/logger.js';
+import { cloudinaryConfig } from './config/cloudinaryConfig.js';
 
 import orders from './routes/orders.js';
 import users from './routes/users.js';
@@ -11,7 +12,6 @@ import auth from './routes/auth.js';
 import menu from './routes/menu.js';
 
 const PORT = process.env.PORT || 5000;
-
 const app = express();
 
 const swaggerDoc = YAML.load('./config/swagger.yaml');
@@ -19,7 +19,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use(express.json());
 app.use(cors());
-
+app.use('*', cloudinaryConfig);
 app.get('/', (req, res)=>{res.send('fastfood API');})
 app.use('/uploads',express.static("uploads"));
 app.use('/auth', auth);
