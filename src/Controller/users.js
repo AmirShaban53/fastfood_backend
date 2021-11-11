@@ -17,7 +17,7 @@ export default class users{
                 const user = await User.findOne({where:{id: req.userData.id}});
                 const newOrder = {
                     name: food.name,
-                    quantity: 2,
+                    quantity: 1,
                     unit_Price: food.price,
                     price: food.price* 2,
                     status: false,
