@@ -16,7 +16,11 @@ const Food = sequelize.define('food',{
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    image:{
+    image_id:{
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    image_URL:{
         type: Sequelize.STRING,
         allowNull: true
     }

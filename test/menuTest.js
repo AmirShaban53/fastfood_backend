@@ -24,9 +24,14 @@ const token = JWT.sign(
 describe('menu route', () => {
 
     before(async()=>{
-        await Food.sync({force: true});
-        const testFood = await Food.create({name:"water", price: 100});
-        id = testFood.id;
+        try {
+            await Food.sync({force: true});
+            const testFood = await Food.create({name:"water", price: 100});
+            id = testFood.id;
+            
+        } catch (error) {
+            console.log(error);
+        }
     })
     
 

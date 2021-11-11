@@ -1,6 +1,7 @@
 import logger from "../Middleware/logger.js";
 import {Food} from '../models/index.js';
 import fs from 'fs';
+import { uploader } from "../config/cloudinaryConfig.js";
 
 
 
@@ -21,8 +22,9 @@ export default class Menu{
     static addFood = async(req, res) =>{
         try {
             if(typeof req.file !== 'undefined'){
+                const image = await uploader.upload(req.file.path)
                 const {name, price} = req.body;
-                await Food.create({name: name, price:price , image: req.file.path});
+                await Food.create({name: name, price:price, image_id: image.public_id, image_URL: image.secure_url});
                 logger.info('new food created');
                 res.status(201).json("new food created");
 
@@ -67,24 +69,23 @@ export default class Menu{
         try {
             const id = req.params.id;
             const food = await Food.findOne({where:{id: id}});
-            if(food == null || food == undefined)
+            if(food)
             {
+                logger.info(food);
+                if(food.image_id){
+
+                    await uploader.destroy(food.image_id);
+                }
+                await Food.destroy({where: {id: id}});
+                
+                logger.info('food has been deleted');
+                return res.status(200).json("food has been deleted");
+            }
+            else{
+
                 logger.error(`food of ID:${id} doesnot exist`,error);
                 return res.status(500).json({error: 'could not delete food'});
             }
-            logger.info(food.image);
-            fs.unlink(`./${food.image}`, (err) =>{ 
-                if(err){
-                    logger.error('image not found',err);
-                    return
-                }
-                
-            })
-            await Food.destroy({where: {id: id}});
-
-            logger.info('food has been deleted');
-            return res.status(200).json("food has been deleted");
-            
         } 
         catch (error) {
             logger.error("failed to delete food",error);

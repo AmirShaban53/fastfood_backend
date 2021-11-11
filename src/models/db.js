@@ -38,7 +38,7 @@ const connectDB = async() => {
         }
         await sequelize.authenticate();
         if(process.env.NODE_ENV !== 'test'){
-            sequelize.sync();
+            sequelize.sync({});
         }
     } 
     catch (error) {
