@@ -1,8 +1,7 @@
 import logger from "../Middleware/logger.js";
 import {Food} from '../models/index.js';
-import fs from 'fs';
 import { uploader } from "../config/cloudinaryConfig.js";
-
+import { dataUri } from "../Middleware/imageUpload.js";
 
 
 export default class Menu{
@@ -22,7 +21,8 @@ export default class Menu{
     static addFood = async(req, res) =>{
         try {
             if(typeof req.file !== 'undefined'){
-                const image = await uploader.upload(req.file.path);
+                const file = await dataUri(req);
+                const image = await uploader.upload(file);
                 const {name, price} = req.body;
                 await Food.create({name: name, price:price, image_id: image.public_id, image_URL: image.secure_url});
                 logger.info('new food created');

@@ -3,8 +3,8 @@ import express from 'express';
 import YAML from 'yamljs';
 import cors from 'cors';
 
-import logger from './Middleware/logger.js';
 import { cloudinaryConfig } from './config/cloudinaryConfig.js';
+import logger from './Middleware/logger.js';
 
 import orders from './routes/orders.js';
 import users from './routes/users.js';
