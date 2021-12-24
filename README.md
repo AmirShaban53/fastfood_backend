@@ -45,7 +45,6 @@ npm run coverage
 * User can place order.
 * User can view their orders placed.
 * User can view a specific order.
-* User can edit specific order.
 * User view their past orders.
 * Admin can view menu items.
 * Admin can create a new menu item.
