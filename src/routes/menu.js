@@ -24,7 +24,7 @@ router.post('/test', imageUploads, async(req, res)=>{
         }
         
     } catch (error) {
-        logger.error('error occured,', error);
+        logger.error('error occured,', error.message);
         return res.status(500).json({message: error.message});
     }
 
