@@ -37,7 +37,7 @@ export default class Menu{
             }
         } 
         catch (error) {
-            logger.error("failed to create new food",error);
+            logger.error("failed to create new food",error.message);
             res.status(500).json({error: error.message});
         }
     }
