@@ -33,7 +33,7 @@ npm install
 
 ```
 #to start development server
-npm start
+npm run dev-start
 
 #to run unit tests and code coverage
 npm run coverage
@@ -42,16 +42,31 @@ npm run coverage
 ## Features
 * Users can create their own user account.
 * Users can sign in.
-* User can place order.
-* User can view their orders placed.
-* User can view a specific order.
-* User view their past orders.
-* Admin can view menu items.
+* users can view menu items.
 * Admin can create a new menu item.
 * Admin can edit a specific menu item.
 * Admin can delete a specific menu off item.
+* Admin can can view all orders.
+* admin can view a specific order.
+* admin can edit a specific order.
+* User view their past orders.
+* User can place order.
 
 
+## Endpoints
+|  Method  |  Endpoint  |  Task  |
+|  --- |  --- |  ---  |
+|  `POST`   |  `/auth/signup`   |  `User signup`  |
+|  `POST`   |  `/auth/login`    |  `User login`   |
+|  `GET`    |  `/menu`          |  `users can view menu items`  |
+|  `POST`   |  `/menu`          |  `Admin can create a new menu item`  |
+|  `PATCH`  |  `/menu/:id`      |  `Admin can edit a specific menu item`  |
+|  `DELETE` |  `/menu/:id`      |  `Admin can delete a specific menu item`  |
+|  `GET`    |  `/orders`        |  `admin can view all orders`  |
+|  `GET`    |  `/orders/:id`    |  `admin can view a specific order`  |
+|  `PATCH`  |  `/orders/:id`    |  `admin can edit specific order`  |
+|  `GET`    |  `/users/orders`  |  `User can view their past placed` |
+|  `POST`   |  `/users/orders`  |  `User can place orders`  |
 
 ## Credit
 created by Amir Budda Shaban
