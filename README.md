@@ -10,6 +10,11 @@ food delivery app.
 This is a restful API desgined to for a fast food resturant inodrer to be used in online
 orders and delivery.
 
+## Built With
+
+* [NodeJS](https://nodejs.org/) - Runtime Environment
+* [ExpressJs](https://expressjs.com/) - Web Application Framework
+
 ## Getting Started
 
 
@@ -34,12 +39,23 @@ npm start
 npm run coverage
 ```
 
+## Features
+* Users can create their own user account.
+* Users can sign in.
+* User can place order.
+* User can view their orders placed.
+* User can view a specific order.
+* User can edit specific order.
+* User view their past orders.
+* Admin can view menu items.
+* Admin can create a new menu item.
+* Admin can edit a specific menu item.
+* Admin can delete a specific menu off item.
 
 
 
-## Author
-
-AMIR BUDDA SHABAN
+## Credit
+created by Amir Budda Shaban
 
 
 
